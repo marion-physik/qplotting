@@ -1,0 +1,89 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "loter"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Marion Guoth", email = "marion.guoth@rwth-aachen.de" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+  "qcodes",
+  "xarray",
+  "ipywidgets",
+  "ipyfilechooser",
+  "matplotlib",
+  "jsonpickle",
+  "IPython",
+  ]
+
+[project.urls]
+Documentation = "https://git-ce.rwth-aachen.de/qutech/individual-projects/plotting-software"
+Issues = "https://git-ce.rwth-aachen.de/qutech/individual-projects/plotting-software/-/issues"
+Source = "https://git-ce.rwth-aachen.de/qutech/individual-projects/plotting-software"
+
+[tool.hatch.version]
+path = "src/loter/__about__.py"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "coverage[toml]>=6.5",
+  "pytest",
+]
+[tool.hatch.envs.default.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = [
+  "- coverage combine",
+  "coverage report",
+]
+cov = [
+  "test-cov",
+  "cov-report",
+]
+
+[[tool.hatch.envs.all.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+
+[tool.hatch.envs.types]
+dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/loter tests}"
+
+[tool.coverage.run]
+source_pkgs = ["loter", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/loter/__about__.py",
+]
+
+[tool.coverage.paths]
+loter = ["src/loter", "*/loter/src/loter"]
+tests = ["tests", "*/loter/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
