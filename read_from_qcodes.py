@@ -337,7 +337,8 @@ class PlotManager():
                             self.ax.plot(temp_x,temp_y, label=one_y_axis)
                     self.ax.legend()
                     self.manager.update_box()
-                    plt.show()
+                    with self.manager.out:
+                        plt.show()
                 else:
                     print('x and y are not the same length') 
     
