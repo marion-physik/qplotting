@@ -294,7 +294,7 @@ class PlotManager():
         
 
         temp_x = self.dataset.get_parameter_data(self.x_axis)[self.x_axis][self.x_axis]
-        if self.manager.overview_dict_UI_values.get('z_axis') is not None:
+        if self.z_axis is not None:
             temp_z = self.dataset.get_parameter_data(self.z_axis)[self.z_axis][self.z_axis]
             if len(self.y_axis) == 1:
                 temp_y = self.dataset.get_parameter_data(self.y_axis[0])[self.y_axis[0]][self.y_axis[0]]
