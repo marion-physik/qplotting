@@ -72,6 +72,7 @@ class ManagerClass(widgets.Box):
         self.widgets['load_button'] = self.load_button
 
         self.load_button.on_click(self.load_all_ui)
+        self.out = widgets.Output()
         self.update_box()
     
     
@@ -173,4 +174,5 @@ class ManagerClass(widgets.Box):
                 self.box.children = self.box.children + (widget,)
             
         display(self.box)
+        display(self.out)
             
