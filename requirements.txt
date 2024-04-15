@@ -1,0 +1,3 @@
+qcodes
+ipyfilechooser
+jsonpickle
